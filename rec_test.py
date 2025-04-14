@@ -349,7 +349,7 @@ if not os.path.exists(hyperparams_dir):
     os.makedirs(hyperparams_dir)
 
 # Load data
-load_dotenv("supabase.env")
+# load_dotenv("supabase.env")
 
 supabase_url = os.getenv("SUPABASE_DEMO_URL")
 supabase_api = os.getenv("SUPABASE_DEMO_API")
