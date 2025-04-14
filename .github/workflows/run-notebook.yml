@@ -36,6 +36,7 @@ jobs:
 
       - name: Check environment variables
         run: |
+          echo "Checking environment variables..."
           if [ -z "${{ secrets.SUPABASE_DEMO_URL }}" ]; then
             echo "Error: SUPABASE_DEMO_URL is not set"
             exit 1
@@ -51,8 +52,8 @@ jobs:
           SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL }}
           SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API }}
         run: |
-          echo "Running script with environment variables..."
-          export SUPABASE_DEMO_URL="${{ secrets.SUPABASE_DEMO_URL }}"
-          export SUPABASE_DEMO_API="${{ secrets.SUPABASE_DEMO_API }}"
+          echo "Environment variables before running script:"
+          echo "SUPABASE_DEMO_URL: $SUPABASE_DEMO_URL"
+          echo "SUPABASE_DEMO_API: $SUPABASE_DEMO_API"
           python rec_test.py
         # This runs your notebook (converted to .py), and passes in Supabase secrets

@@ -23,8 +23,8 @@ supabase_url = os.getenv("SUPABASE_DEMO_URL")
 supabase_key = os.getenv("SUPABASE_DEMO_API")
 
 # Print environment variables for debugging
-print("Supabase URL:", "Present" if supabase_url else "Missing")
-print("Supabase Key:", "Present" if supabase_key else "Missing")
+print("Supabase URL:", supabase_url)
+print("Supabase Key:", supabase_key)
 
 if not supabase_url or not supabase_key:
     raise ValueError("Supabase credentials not found in environment variables. Please set SUPABASE_DEMO_URL and SUPABASE_DEMO_API.")
