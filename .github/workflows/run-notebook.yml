@@ -38,5 +38,9 @@ jobs:
         env:
           SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL }}
           SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API }}
-        run: python rec_test.py
+        run: |
+          echo "Environment variables:"
+          echo "SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL != '' && 'Present' || 'Missing' }}"
+          echo "SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API != '' && 'Present' || 'Missing' }}"
+          python rec_test.py
         # This runs your notebook (converted to .py), and passes in Supabase secrets
