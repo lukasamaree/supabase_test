@@ -36,7 +36,7 @@ jobs:
 
       - name: Run your script
         env:
-          SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_URL }}
-          SUPABASE_DEMO_API: ${{ secrets.SUPABASE_KEY }}
+          SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL }}
+          SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API }}
         run: python rec_test.py
         # This runs your notebook (converted to .py), and passes in Supabase secrets
