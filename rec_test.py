@@ -595,7 +595,8 @@ df
 # In[ ]:
 
 
-
+df = df[["user_id","recipe_id","adjusted_rating"]]
+df = df.rename(columns={"adjusted_rating":"predicted_rating"})
 
 
 # In[396]:
@@ -617,6 +618,7 @@ supabase.table("recs").upsert(top_20,
 
 
 
+print("✅ Done!")
 
 
 
