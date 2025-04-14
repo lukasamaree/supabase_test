@@ -15,6 +15,18 @@ import json
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
+# Load environment variables
+load_dotenv()
+
+# Get Supabase credentials from environment variables
+supabase_url = os.getenv("SUPABASE_DEMO_URL")
+supabase_key = os.getenv("SUPABASE_DEMO_API")
+
+if not supabase_url or not supabase_key:
+    raise ValueError("Supabase credentials not found in environment variables. Please set SUPABASE_DEMO_URL and SUPABASE_DEMO_API.")
+
+# Initialize Supabase client
+supabase = create_client(supabase_url, supabase_key)
 
 # In[365]:
 
@@ -350,10 +362,6 @@ if not os.path.exists(hyperparams_dir):
 
 # Load data
 # load_dotenv("supabase.env")
-
-supabase_url = os.getenv("SUPABASE_DEMO_URL")
-supabase_api = os.getenv("SUPABASE_DEMO_API")
-supabase = create_client(supabase_url, supabase_api)
 
 # Get recipes and ratings
 recipes = supabase.table("recipes").select("*").execute().data
