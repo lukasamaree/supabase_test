@@ -1,0 +1,34 @@
+name: Run Notebook and Upsert to Supabase
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"    # Triggers at 2:00 AM UTC daily
+  workflow_dispatch:         # Allows manual triggering from GitHub UI
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest    # Run this job on the latest Ubuntu VM
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        # This pulls your GitHub repo code so the job can access your files
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+        # This installs Python 3.10 on the runner
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install supabase pandas
+        # Installs Python packages you need (e.g., pandas, supabase)
+
+      - name: Run your script
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python .py
+        # This runs your notebook (converted to .py), and passes in Supabase secrets
