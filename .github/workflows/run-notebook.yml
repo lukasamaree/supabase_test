@@ -21,10 +21,8 @@ jobs:
         # This installs Python 3.10 on the runner
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install supabase pandas
-        # Installs Python packages you need (e.g., pandas, supabase)
+        run: pip install -r requirements.txt
+        # Installs Python packages from requirements.txt
 
       - name: Run your script
         env:
