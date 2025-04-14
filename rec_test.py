@@ -20,7 +20,8 @@ from supabase import create_client, Client
 
 # Only load .env file if not running in GitHub Actions
 if os.getenv("GITHUB_ACTIONS") is None:
-    load_dotenv()
+    load_dotenv("supabase.env")
+    print("checking")
 
 
 supabase_url = os.environ.get("SUPABASE_DEMO_URL")
@@ -28,8 +29,8 @@ supabase_key = os.environ.get("SUPABASE_DEMO_API") # Changed from supabase_api t
 
 # Print environment variables for debugging
 print("Running in GitHub Actions:", os.getenv("GITHUB_ACTIONS") is not None)
-print("Supabase URL:", supabase_url)
-print("Supabase Key:", supabase_key)
+# print("Supabase URL:", supabase_url)
+# print("Supabase Key:", supabase_key)
 
 if not supabase_url or not supabase_key:
     raise ValueError("Supabase credentials not found in environment variables. Please set SUPABASE_DEMO_URL and SUPABASE_DEMO_API.")
@@ -611,6 +612,8 @@ top_20
 
 print("🚀 Upserting...")
 
+print("Example row before upsert:", top_20[0])
+print("Data type of keys:", {k: type(v) for k, v in top_20[0].items()})
 
 supabase.table("recs").upsert(top_20,
         on_conflict="user_id,recipe_id"
