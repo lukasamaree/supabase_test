@@ -15,14 +15,18 @@ import json
 from dotenv import load_dotenv
 from supabase import create_client, Client
 
-# Load environment variables
-load_dotenv()
+# Load data
+# load_dotenv("supabase.env")
 
-# Get Supabase credentials from environment variables
+# Only load .env file if not running in GitHub Actions
+if os.getenv("GITHUB_ACTIONS") is None:
+    load_dotenv()
+
 supabase_url = os.getenv("SUPABASE_DEMO_URL")
-supabase_key = os.getenv("SUPABASE_DEMO_API")
+supabase_key = os.getenv("SUPABASE_DEMO_API")  # Changed from supabase_api to supabase_key
 
 # Print environment variables for debugging
+print("Running in GitHub Actions:", os.getenv("GITHUB_ACTIONS") is not None)
 print("Supabase URL:", supabase_url)
 print("Supabase Key:", supabase_key)
 
@@ -363,9 +367,6 @@ class RecipeRecommender:
 hyperparams_dir = 'hyperparameters'
 if not os.path.exists(hyperparams_dir):
     os.makedirs(hyperparams_dir)
-
-# Load data
-# load_dotenv("supabase.env")
 
 # Get recipes and ratings
 recipes = supabase.table("recipes").select("*").execute().data

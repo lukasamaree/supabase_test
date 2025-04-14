@@ -49,6 +49,7 @@ jobs:
 
       - name: Run your script
         env:
+          GITHUB_ACTIONS: "true"
           SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL }}
           SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API }}
         run: |
