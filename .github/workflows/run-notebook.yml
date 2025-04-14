@@ -34,13 +34,25 @@ jobs:
           pip install supabase==1.0.3
         # Installs Python packages from requirements.txt
 
+      - name: Check environment variables
+        run: |
+          if [ -z "${{ secrets.SUPABASE_DEMO_URL }}" ]; then
+            echo "Error: SUPABASE_DEMO_URL is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.SUPABASE_DEMO_API }}" ]; then
+            echo "Error: SUPABASE_DEMO_API is not set"
+            exit 1
+          fi
+          echo "Environment variables are set"
+
       - name: Run your script
         env:
           SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL }}
           SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API }}
         run: |
-          echo "Environment variables:"
-          echo "SUPABASE_DEMO_URL: ${{ secrets.SUPABASE_DEMO_URL != '' && 'Present' || 'Missing' }}"
-          echo "SUPABASE_DEMO_API: ${{ secrets.SUPABASE_DEMO_API != '' && 'Present' || 'Missing' }}"
+          echo "Running script with environment variables..."
+          export SUPABASE_DEMO_URL="${{ secrets.SUPABASE_DEMO_URL }}"
+          export SUPABASE_DEMO_API="${{ secrets.SUPABASE_DEMO_API }}"
           python rec_test.py
         # This runs your notebook (converted to .py), and passes in Supabase secrets
