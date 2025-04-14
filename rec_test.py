@@ -22,8 +22,9 @@ from supabase import create_client, Client
 if os.getenv("GITHUB_ACTIONS") is None:
     load_dotenv()
 
-supabase_url = os.getenv("SUPABASE_DEMO_URL")
-supabase_key = os.getenv("SUPABASE_DEMO_API")  # Changed from supabase_api to supabase_key
+
+supabase_url = os.environ.get("SUPABASE_DEMO_URL")
+supabase_key = os.environ.get("SUPABASE_DEMO_API") # Changed from supabase_api to supabase_key
 
 # Print environment variables for debugging
 print("Running in GitHub Actions:", os.getenv("GITHUB_ACTIONS") is not None)
